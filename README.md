@@ -1,5 +1,8 @@
-# todoapp
+# To Do App
 회원가입,로그인,채팅 기능을 추가한 Todo App입니다.
+
+![투두앱](https://user-images.githubusercontent.com/76992049/158594322-9953fc6d-5f2c-4b08-9099-e8523dd65fa8.PNG)
+
 
 
 ## 기능
