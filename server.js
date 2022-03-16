@@ -12,6 +12,10 @@ app.use("/public", express.static("public"));
 
 require('dotenv').config()
 
+const http = require('http').createServer(app);
+const { Server, Socket } = require("socket.io");
+const io = new Server(http);
+
 
 
 var db;
@@ -22,11 +26,42 @@ MongoClient.connect(
 
     db = client.db("todoapp");
 
-    app.listen(process.env.PORT, function () {
+    http.listen(process.env.PORT, function () {
       console.log("listening on 8080");
     });
   }
 );
+
+app.get('/socket',function(요청,응답){
+  응답.render('socket.ejs')
+})
+
+io.on('connection',function(socket){
+  console.log(socket.id)
+
+  socket.on('room1-send',function(data){
+    io.to('room1').emit('broadcast',data)
+  })
+
+  socket.on('joinroom',function(data){
+    socket.join('room1');
+  })
+
+  
+
+  socket.on('user-send',function(data){
+    //단체채팅방
+    io.emit('broadcast',data)
+
+    //특정유저에게만 전송
+    //io.to(socket.id).emit('broadcast',data)
+  })
+
+
+})
+
+
+
 
 app.get("/pet", function (요청, 응답) {
   응답.send("펫사이트 입니다");
