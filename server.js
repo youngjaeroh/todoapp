@@ -73,10 +73,6 @@ app.get("/", function (요청, 응답) {
   //응답.sendFile(__dirname + '/views/index.ejs')
   응답.render("index.ejs");
 });
-app.get("/write", function (요청, 응답) {
-  //응답.sendFile(__dirname + '/views/write.ejs')
-  응답.render("write.ejs");
-});
 
 
 
@@ -135,8 +131,19 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+app.get("/write",로그인했니, function (요청, 응답) {
+  //응답.sendFile(__dirname + '/views/write.ejs')
+  응답.render("write.ejs");
+});
+
+
 app.get("/login", function (요청, 응답) {
   응답.render("login.ejs");
+});
+
+app.get("/register", function (요청, 응답) {
+  응답.render("register.ejs");
 });
 
 app.post(
@@ -158,7 +165,8 @@ function 로그인했니(요청, 응답, next) {
   if (요청.user) {
     next()
   } else {
-    응답.send('로그인안하쎴는데요')
+    //응답.send('로그인안하쎴는데요')
+    응답.redirect("/");
   }
 
 }
@@ -244,7 +252,9 @@ app.delete("/delete", function (요청, 응답) {
   console.log(요청.body);
   요청.body._id = parseInt(요청.body._id);
 
-  var 삭제할데이터 = { _id: 요청.body.id, 작성자: 요청.user._id }
+  console.log(요청.body._id, 요청.user._id)
+
+  var 삭제할데이터 = { _id: 요청.body._id, 작성자: 요청.user._id }
 
   db.collection("post").deleteOne(삭제할데이터, function (에러, 결과) {
     console.log("삭제완료");
