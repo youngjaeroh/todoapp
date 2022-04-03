@@ -1,7 +1,8 @@
 # To Do App
 회원가입,로그인 기능을 추가한 Todo App입니다.
 
-![투두앱](https://user-images.githubusercontent.com/76992049/158594322-9953fc6d-5f2c-4b08-9099-e8523dd65fa8.PNG)
+![캡처](https://user-images.githubusercontent.com/76992049/161435532-f1d21f9d-5a92-4a93-9791-a045b1761ad6.JPG)
+
 
 
 
